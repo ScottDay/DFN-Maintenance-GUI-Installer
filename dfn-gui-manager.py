@@ -1,10 +1,20 @@
 #!/usr/bin/python3.6
 
-from argh import arg, aliases, ArghParser, expects_obj
+import logging
+
+from argh import ArghParser
+
+from src.update import update
+from src.start import start
+from src.stop import stop
+from src.restart import restart
 
 
-def update():
-	"""Update command."""
+def init_logger():
+	logging.basicConfig(
+		level = logging.INFO,
+		format = "[%(asctime)s] [%(levelname)s] %(message)s",
+		datefmt = '%Y-%m-%d %H:%M:%S')
 
 
 def package_info():
@@ -33,12 +43,15 @@ url:     {3}
 
 def main():
 	"""Entry-point function."""
+	init_logger()
 	description, epilog, version = package_info()
 
-	parser = ArghParser(description = description, epilog = epilog)
-	parser.add_commands([update])
-	parser.add_argument('--version', action = 'version', version = version)
-	parser.dispatch()
+	parent_parser = ArghParser(description = description, epilog = epilog)
+	parent_parser.add_commands([update, start, stop, restart])
+	parent_parser.add_argument('-v', '--version', action = 'version', version = version)
+	parent_parser.dispatch()
+
+	logging.shutdown()
 
 
 if __name__ == '__main__':
