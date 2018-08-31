@@ -1,14 +1,11 @@
-from argh import arg
+from argh import arg, expects_obj
 
-from src import log, silent, debug, common_handler
+from src import log, common
 
 
-@silent
-@debug
-@expects_obj
-@common_handler
+@common
 def stop(args):
 	"""
 	Stop the GUI.
 	"""
-	print('stop')
+	log.debug('stop')

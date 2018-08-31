@@ -1,14 +1,11 @@
-from argh import arg
+from argh import arg, expects_obj
 
-from src import log, silent, debug, common_handler
+from src import log, common
 
 
-@silent
-@debug
-@expects_obj
-@common_handler
+@common
 def restart(args):
 	"""
 	Restart the GUI.
 	"""
-	print('restart')
+	log.debug('restart')
