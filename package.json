@@ -1,0 +1,22 @@
+{
+    "name": "dfn-maintenance-gui-installer",
+    "productName": "Desert Fireball Maintenance GUI Installer",
+    "description": "Repository for installing and managing the DFN-Maintenance-GUI project.",
+    "author": "Ryan Scott Day <265815F@curtin.edu.au>",
+    "version": "0.0.0",
+    "license": "MIT",
+    "private": false,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ScottDay/DFN-Maintenance-GUI-Installer"
+    },
+    "engines": {
+        "node": ">=7.2.0",
+        "npm": ">=4.0.2"
+    },
+    "devDependencies": {
+        "semantic-release": "15.9.12",
+        "@semantic-release/changelog": "3.0.0",
+        "@semantic-release/git": "7.0.3"
+    }
+}
