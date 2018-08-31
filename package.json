@@ -1,7 +1,7 @@
 {
     "name": "dfn-maintenance-gui-installer",
     "productName": "Desert Fireball Maintenance GUI Installer",
-    "description": "Repository for installing and managing the DFN-Maintenance-GUI project.",
+    "description": "Repository for installing, updating, and managing the DFN-Maintenance-GUI project.",
     "author": "Ryan Scott Day <265815F@curtin.edu.au>",
     "version": "0.0.0",
     "license": "MIT",
