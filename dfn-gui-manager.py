@@ -4,6 +4,7 @@ import logging
 
 from argh import ArghParser
 
+from src import log
 from src.update import update
 from src.start import start
 from src.stop import stop
@@ -43,13 +44,20 @@ url:     {3}
 
 def main():
 	"""Entry-point function."""
-	init_logger()
-	description, epilog, version = package_info()
 
-	parent_parser = ArghParser(description = description, epilog = epilog)
-	parent_parser.add_commands([update, start, stop, restart])
-	parent_parser.add_argument('-v', '--version', action = 'version', version = version)
-	parent_parser.dispatch()
+	init_logger()
+
+	try:
+		description, epilog, version = package_info()
+
+		parent_parser = ArghParser(description = description, epilog = epilog)
+		parent_parser.add_commands([update, start, stop, restart])
+		parent_parser.add_argument('-v', '--version', action = 'version', version = version)
+		parent_parser.dispatch()
+	except Exception as error:
+		log.critical('Error! Exiting...')
+	else:
+		log.info('Success! Exiting...')
 
 	logging.shutdown()
 
