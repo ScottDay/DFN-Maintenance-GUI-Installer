@@ -5,10 +5,11 @@ import logging
 from argh import ArghParser
 
 from src import log
-from src.update import update
-from src.start import start
-from src.stop import stop
-from src.restart import restart
+from src.util import load_package_json
+from src.commands.update import update
+from src.commands.start import start
+from src.commands.stop import stop
+from src.commands.restart import restart
 
 
 def init_logger():
@@ -19,25 +20,24 @@ def init_logger():
 
 
 def package_info():
-	try:
-		import json
+	description = 'Could not load description...'
+	epilog = 'Could not load epilog...'
+	version = 'Could not load version...'
 
-		json_data = open('package.json')
-		package_file = json.load(json_data)
-		json_data.close()
+	package_json = load_json_file('package.json')
 
-		description = package_file['description']
-		version = 'v' + package_file['version']
+	if package_json is not None:
+		description = package_json['description']
+		version = 'v' + package_json['version']
 		epilog = '''
 author:  {0}
 version: {1}
 license: {2}
 url:     {3}
-		'''.format(package_file['author'], version, package_file['license'], package_file['repository']['url'])
-	except FileNotFoundError as error:
-		description = 'Could not load description...'
-		epilog = 'Could not load epilog...'
-		version = 'Could not load version...'
+		'''.format(package_json['author'],
+					version,
+					package_json['license'],
+					package_json['repository']['url'])
 
 	return description, epilog, version
 
@@ -55,9 +55,10 @@ def main():
 		parent_parser.add_argument('-v', '--version', action = 'version', version = version)
 		parent_parser.dispatch()
 	except Exception as error:
+		log.critical(error)
 		log.critical('Error! Exiting...')
 	else:
-		log.info('Success! Exiting...')
+		log.debug('Success! Exiting...')
 
 	logging.shutdown()
 

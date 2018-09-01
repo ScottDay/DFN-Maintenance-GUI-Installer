@@ -1,4 +1,5 @@
-from src import log, common
+from src import log
+from src.commands import common
 
 
 @common
