@@ -32,7 +32,7 @@ url:     {3}
 	return description, epilog, version
 
 
-def main():
+if __name__ == '__main__':
 	"""Entry-point function."""
 	init()
 	description, epilog, version = package_info()
@@ -43,7 +43,3 @@ def main():
 	parent_parser.dispatch()
 
 	logging.shutdown()
-
-
-if __name__ == '__main__':
-	main()
