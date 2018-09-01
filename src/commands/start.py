@@ -1,10 +1,10 @@
-from src import log
-from src.commands import common
+from .shared import wrapper, log
 
 
-@common
+@wrapper
 def start(args):
 	"""
 	Start the GUI.
 	"""
-	log.debug('start')
+	log.debug('TODO: Implement start...')
+

@@ -4,19 +4,9 @@ import logging
 
 from argh import ArghParser
 
-from src import log
-from src.util import load_package_json
-from src.commands.update import update
-from src.commands.start import start
-from src.commands.stop import stop
-from src.commands.restart import restart
-
-
-def init_logger():
-	logging.basicConfig(
-		level = logging.INFO,
-		format = "[%(asctime)s] [%(levelname)s] %(message)s",
-		datefmt = '%Y-%m-%d %H:%M:%S')
+from src.extensions import init
+from src.util import load_json_file
+from src.commands import update, start, stop, restart
 
 
 def package_info():
@@ -44,21 +34,13 @@ url:     {3}
 
 def main():
 	"""Entry-point function."""
+	init()
+	description, epilog, version = package_info()
 
-	init_logger()
-
-	try:
-		description, epilog, version = package_info()
-
-		parent_parser = ArghParser(description = description, epilog = epilog)
-		parent_parser.add_commands([update, start, stop, restart])
-		parent_parser.add_argument('-v', '--version', action = 'version', version = version)
-		parent_parser.dispatch()
-	except Exception as error:
-		log.critical(error)
-		log.critical('Error! Exiting...')
-	else:
-		log.debug('Success! Exiting...')
+	parent_parser = ArghParser(description = description, epilog = epilog)
+	parent_parser.add_commands([update, start, stop, restart])
+	parent_parser.add_argument('-v', '--version', action = 'version', version = version)
+	parent_parser.dispatch()
 
 	logging.shutdown()
 

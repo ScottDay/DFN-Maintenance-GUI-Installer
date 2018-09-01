@@ -1,14 +1,13 @@
 import re
 
-from src import log
-from src.util import load_package_json
-from src.commands import common
+from src.util import load_json_file
+from .shared import wrapper, log
 
 
 # TODO: Default to online, optionally pass a tar file or directory to check.
 # TODO: Shutdown the project if an update is available.
 # TODO: Option to just check for a new version. Don't download.
-@common
+@wrapper
 def update(args):
 	"""
 	Update the project to the latest version.
@@ -44,16 +43,13 @@ def check_version():
 
 def download_json(url):
 	# https://stackoverflow.com/questions/7243750/download-file-from-web-in-python-3#answer-7244263
-	try:
-		from urllib import request
-		import json
+	from urllib import request
+	import json
 
-		# Download from url.
-		response = request.urlopen(url)
-		data = response.read()
-		text = data.decode('utf-8')
+	# Download from url.
+	response = request.urlopen(url)
+	data = response.read()
+	text = data.decode('utf-8')
 
-		# Load json.
-		return json.loads(text)
-	except Exception as error:
-		raise ValueError(error)
+	# Load json.
+	return json.loads(text)

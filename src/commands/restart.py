@@ -1,10 +1,9 @@
-from src import log
-from src.commands import common
+from .shared import wrapper, log
 
 
-@common
+@wrapper
 def restart(args):
 	"""
 	Restart the GUI.
 	"""
-	log.debug('restart')
+	log.debug('TODO: Implement restart...')

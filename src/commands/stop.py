@@ -1,10 +1,10 @@
-from src import log
-from src.commands import common
+from .shared import wrapper, log
 
 
-@common
+@wrapper
 def stop(args):
 	"""
 	Stop the GUI.
 	"""
-	log.debug('stop')
+	log.debug('TODO: Implement stop...')
+
