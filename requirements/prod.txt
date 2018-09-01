@@ -1,0 +1,4 @@
+# Everything needed in production
+
+# CLI
+argh==0.26.2
