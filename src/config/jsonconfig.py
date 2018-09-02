@@ -45,8 +45,7 @@ def load(fo):
 
 
 def loads(s):
-	decoder = JSONDecoder(encoding="utf-8",
-							object_hook = _object_hook,
+	decoder = JSONDecoder(object_hook = _object_hook,
 							parse_float = None,
 							parse_int = None,
 							parse_constant = None,
@@ -114,7 +113,7 @@ def read_config(path_or_file):
 	return _convert_dict(d)
 
 
-def write_config(conf, path_or_file = 'config.json'):
+def write_config(conf, path_or_file = 'config/config.json'):
 	"""
 	Write a JSON config file.
 	"""
@@ -132,7 +131,7 @@ def write_config(conf, path_or_file = 'config.json'):
 		fp.close()
 
 
-def get_config(filename = None, init = None):
+def get_config(filename = 'config/config.json', init = None):
 	"""
 	Get an existing or new json config object.
 
@@ -140,9 +139,6 @@ def get_config(filename = None, init = None):
 	"""
 	if init is not None:
 		return _convert_dict(init)
-
-	if filename is None:
-		return AutoAttrDict()
 
 	if os.path.exists(filename):
 		return read_config(filename)

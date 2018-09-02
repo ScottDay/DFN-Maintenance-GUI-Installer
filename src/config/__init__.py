@@ -1,3 +1,5 @@
+from .jsonconfig import get_config, read_config, write_config, is_modified
+
 __all__ = ['get_config', 'read_config', 'write_config', 'is_modified']
 
 # Usage.

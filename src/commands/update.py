@@ -1,7 +1,8 @@
 import re
 
-from src.util import load_json_file
 from .shared import wrapper, log
+from src.util import load_json_file
+from src.config import get_config
 
 
 # TODO: Default to online, optionally pass a tar file or directory to check.
@@ -21,9 +22,9 @@ def check_version():
 
 	result = False
 
+	conf = get_config()
+	package_json = load_json_file(conf.installerPath + conf.envFile)
 	downloaded_json = download_json('https://api.github.com/repos/ScottDay/DFN-Maintenance-GUI/releases/latest')
-	# TODO: Give path to project install dir, load env.json.
-	package_json = load_json_file('')
 
 	log.debug('Parsing local and remote version tags.')
 	remote_version = downloaded_json['tag_name']

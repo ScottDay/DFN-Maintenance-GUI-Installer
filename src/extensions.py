@@ -1,11 +1,16 @@
 import logging
 
+from src.config import get_config
+
 
 def init():
-	logger()
+	# TODO: CLI argument for dev mode, load dev config.
+	conf = get_config()
+
+	logger(conf)
 
 
-def logger():
+def logger(conf):
 	"""
 	Sets up the applications root logger.
 
@@ -38,11 +43,12 @@ def logger():
 		return new
 
 	logging.basicConfig(
-		level = 20,
-		format = "[%(asctime)s] [%(levelname)8s] %(message)s",
-		datefmt = '%Y-%m-%d %H:%M:%S')
+		level = conf.logger.level,
+		format = conf.logger.format,
+		datefmt = conf.logger.datefmt)
 
-	logging.StreamHandler.emit = color_logs(logging.StreamHandler.emit)
+	if conf.logger.color:
+		logging.StreamHandler.emit = color_logs(logging.StreamHandler.emit)
 
 
 
