@@ -1,13 +1,21 @@
 import logging
 
-from src.config import get_config
+from src.config import get_config, write_config
 
 
 def init():
-	# TODO: CLI argument for dev mode, load dev config.
-	conf = get_config()
-
+	conf = config()
 	logger(conf)
+
+
+def config():
+	"""
+	Setup either the base configuration file.
+	"""
+	conf = get_config('config/base.json')
+	write_config(conf)
+
+	return conf
 
 
 def logger(conf):

@@ -40,6 +40,6 @@ if __name__ == '__main__':
 	parent_parser = ArghParser(description = description, epilog = epilog)
 	parent_parser.add_commands([update, start, stop, restart])
 	parent_parser.add_argument('-v', '--version', action = 'version', version = version)
-	parent_parser.dispatch()
 
+	parent_parser.dispatch()
 	logging.shutdown()
