@@ -1,4 +1,4 @@
-from src.util.misc import log
+from src.util.logger import logger
 from src.util.wrappers import wrapper
 from src.util.json import load_json
 from src.config import get_config
@@ -19,7 +19,7 @@ def update(args):
 
 
 def check_version(conf):
-	log.debug('Checking versions')
+	logger.debug('Checking versions')
 
 	remote_version = load_json(conf.releaseUrl, keys = 'tag_name')
 	local_version = load_json(conf.installerPath, conf.envFile, keys = 'version.release')
@@ -32,12 +32,12 @@ def parse_tags(remote, local):
 
 	result = False
 
-	log.debug('Parsing version tags.')
+	logger.debug('Parsing version tags.')
 
 	remote = re.sub('[^0-9]', '', remote)
 	local = re.sub('[^0-9]', '', local)
 
-	log.debug('Remote / local versions v{0}:v{1}'.format(remote, local))
+	logger.debug('Remote / local versions v{0}:v{1}'.format(remote, local))
 
 	if remote > local:
 		result = True

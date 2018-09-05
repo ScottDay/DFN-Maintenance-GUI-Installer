@@ -1,4 +1,4 @@
-from src.util.misc import log
+from src.util.logger import logger
 from src.util.wrappers import wrapper
 
 
@@ -7,5 +7,5 @@ def start(args):
 	"""
 	Start the GUI.
 	"""
-	log.debug('TODO: Implement start...')
+	logger.debug('TODO: Implement start...')
 

@@ -1,4 +1,4 @@
-from src.util.misc import log
+from src.util.logger import logger
 from src.util.wrappers import wrapper
 
 
@@ -7,4 +7,4 @@ def restart(args):
 	"""
 	Restart the GUI.
 	"""
-	log.debug('TODO: Implement restart...')
+	logger.debug('TODO: Implement restart...')

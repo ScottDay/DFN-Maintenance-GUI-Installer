@@ -1,6 +1,5 @@
-import logging
-
 from src.config import get_config, write_config
+from src.util.logger import logging
 
 
 def init():

@@ -1,8 +1,7 @@
-from .misc import log
+from .logger import logging, logger
 
 
 def wrapper(function):
-	import logging
 	from argh import arg, expects_obj
 	from functools import wraps
 
@@ -17,11 +16,11 @@ def wrapper(function):
 				logging.disabled = True
 
 			if args[0].debug:
-				log.debug('Debug logging enabled...')
-				log.setLevel(logging.DEBUG)
+				logger.debug('Debug logging enabled...')
+				logger.setLevel(logging.DEBUG)
 
 			if args[0].dev:
-				log.debug('Using development config...')
+				logger.debug('Using development config...')
 				from src.config import get_config, write_config
 
 				conf = get_config('config/config.json', 'config/dev.json')
@@ -35,7 +34,7 @@ def wrapper(function):
 			filename = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
 			line_number = exc_tb.tb_lineno
 
-			log.critical("{0} [{1}:{2}]: {3}".format(type(error).__name__, filename, line_number, str(error)))
+			logger.critical("{0} [{1}:{2}]: {3}".format(type(error).__name__, filename, line_number, str(error)))
 
 			if args[0].dev:
 				raise error

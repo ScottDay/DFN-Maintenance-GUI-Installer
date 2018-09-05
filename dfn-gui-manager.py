@@ -1,11 +1,10 @@
 #!/usr/bin/python3.6
 
-import logging
-
 from argh import ArghParser
 
 from src.extensions import init
 from src.util.json import load_json
+from src.util.logger import logging
 from src.commands import update, start, stop, restart
 
 
