@@ -1,5 +1,17 @@
 DFN-MAINTENANCE-GUI-INSTALLER
 
+# [1.1.0](https://github.com/ScottDay/DFN-Maintenance-GUI-Installer/compare/v1.0.0...v1.1.0) (2018-09-05)
+
+
+### Features
+
+* **config:** base and dev config handling ([0a94763](https://github.com/ScottDay/DFN-Maintenance-GUI-Installer/commit/0a94763))
+* **config:** basic json config ([79ca56c](https://github.com/ScottDay/DFN-Maintenance-GUI-Installer/commit/79ca56c))
+* **json:** load local or remote json files ([9377dc1](https://github.com/ScottDay/DFN-Maintenance-GUI-Installer/commit/9377dc1))
+* **logging:** log exceptions and, in dev mode, log stack trace ([1c5e7ad](https://github.com/ScottDay/DFN-Maintenance-GUI-Installer/commit/1c5e7ad))
+* **logging:** logging decorators ([09ed7e4](https://github.com/ScottDay/DFN-Maintenance-GUI-Installer/commit/09ed7e4))
+* **update:** dry update check ([52fec5f](https://github.com/ScottDay/DFN-Maintenance-GUI-Installer/commit/52fec5f))
+
 # 1.0.0 (2018-09-01)
 
 
