@@ -32,7 +32,9 @@ url:     {3}
 
 
 if __name__ == '__main__':
-	"""Entry-point function."""
+	"""
+	Entry-point function.
+	"""
 	init()
 	description, epilog, version = package_info()
 
