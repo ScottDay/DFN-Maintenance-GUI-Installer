@@ -1,11 +1,10 @@
 #!/usr/bin/python3.6
 
-import logging
-
 from argh import ArghParser
 
 from src.extensions import init
-from src.util import load_json_file
+from src.util.json import load_json
+from src.util.logger import logging
 from src.commands import update, start, stop, restart
 
 
@@ -14,7 +13,7 @@ def package_info():
 	epilog = 'Could not load epilog...'
 	version = 'Could not load version...'
 
-	package_json = load_json_file('package.json')
+	package_json = load_json('package.json')
 
 	if package_json is not None:
 		description = package_json['description']
@@ -33,13 +32,15 @@ url:     {3}
 
 
 if __name__ == '__main__':
-	"""Entry-point function."""
+	"""
+	Entry-point function.
+	"""
 	init()
 	description, epilog, version = package_info()
 
 	parent_parser = ArghParser(description = description, epilog = epilog)
 	parent_parser.add_commands([update, start, stop, restart])
 	parent_parser.add_argument('-v', '--version', action = 'version', version = version)
-	parent_parser.dispatch()
 
+	parent_parser.dispatch()
 	logging.shutdown()

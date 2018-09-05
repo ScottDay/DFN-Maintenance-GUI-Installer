@@ -1,11 +1,23 @@
-import logging
+from src.config import get_config, write_config
+from src.util.logger import logging
 
 
 def init():
-	logger()
+	conf = config()
+	logger(conf)
 
 
-def logger():
+def config():
+	"""
+	Setup either the base configuration file.
+	"""
+	conf = get_config('config/base.json')
+	write_config(conf)
+
+	return conf
+
+
+def logger(conf):
 	"""
 	Sets up the applications root logger.
 
@@ -38,11 +50,12 @@ def logger():
 		return new
 
 	logging.basicConfig(
-		level = 20,
-		format = "[%(asctime)s] [%(levelname)8s] %(message)s",
-		datefmt = '%Y-%m-%d %H:%M:%S')
+		level = conf.logger.level,
+		format = conf.logger.format,
+		datefmt = conf.logger.datefmt)
 
-	logging.StreamHandler.emit = color_logs(logging.StreamHandler.emit)
+	if conf.logger.color:
+		logging.StreamHandler.emit = color_logs(logging.StreamHandler.emit)
 
 
 
