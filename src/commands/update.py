@@ -1,7 +1,6 @@
-import re
-
-from .shared import wrapper, log
-from src.util import load_json_file
+from src.util.misc import log
+from src.util.wrappers import wrapper
+from src.util.json import load_json
 from src.config import get_config
 
 
@@ -13,44 +12,34 @@ def update(args):
 	"""
 	Update the project to the latest version.
 	"""
+	conf = get_config()
+
 	# Download and check version information.
-	check_version()
+	check_version(conf)
 
 
-def check_version():
+def check_version(conf):
 	log.debug('Checking versions')
+
+	remote_version = load_json(conf.releaseUrl, keys = 'tag_name')
+	local_version = load_json(conf.installerPath, conf.envFile, keys = 'version.release')
+
+	return parse_tags(remote_version, local_version)
+
+
+def parse_tags(remote, local):
+	import re
 
 	result = False
 
-	conf = get_config()
-	package_json = load_json_file(conf.installerPath + conf.envFile)
-	downloaded_json = download_json('https://api.github.com/repos/ScottDay/DFN-Maintenance-GUI/releases/latest')
+	log.debug('Parsing version tags.')
 
-	log.debug('Parsing local and remote version tags.')
-	remote_version = downloaded_json['tag_name']
-	remote_version = re.sub('[^0-9]', '', remote_version)
+	remote = re.sub('[^0-9]', '', remote)
+	local = re.sub('[^0-9]', '', local)
 
-	local_version = package_json['version']
-	local_version = re.sub('[^0-9]', '', local_version)
+	log.debug('Remote / local versions v{0}:v{1}'.format(remote, local))
 
-	log.debug('Remote version: v{}'.format(remote_version))
-	log.debug('Local version: v{}'.format(local_version))
-
-	if remote_version > local_version:
+	if remote > local:
 		result = True
 
 	return result
-
-
-def download_json(url):
-	# https://stackoverflow.com/questions/7243750/download-file-from-web-in-python-3#answer-7244263
-	from urllib import request
-	import json
-
-	# Download from url.
-	response = request.urlopen(url)
-	data = response.read()
-	text = data.decode('utf-8')
-
-	# Load json.
-	return json.loads(text)

@@ -1,10 +1,8 @@
-import logging
-
-
-log = logging.getLogger()
+from .misc import log
 
 
 def wrapper(function):
+	import logging
 	from argh import arg, expects_obj
 	from functools import wraps
 

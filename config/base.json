@@ -1,6 +1,7 @@
 {
 	"installerPath": "/opt/dfn-software/DFN-Maintenance-GUI",
 	"envFile": "/env.json",
+	"releaseUrl": "https://api.github.com/repos/ScottDay/DFN-Maintenance-GUI/releases/latest",
 	"logger": {
 		"level": 20,
 		"color": true,

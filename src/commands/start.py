@@ -1,4 +1,5 @@
-from .shared import wrapper, log
+from src.util.misc import log
+from src.util.wrappers import wrapper
 
 
 @wrapper

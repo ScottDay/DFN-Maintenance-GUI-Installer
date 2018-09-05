@@ -5,7 +5,7 @@ import logging
 from argh import ArghParser
 
 from src.extensions import init
-from src.util import load_json_file
+from src.util.json import load_json
 from src.commands import update, start, stop, restart
 
 
@@ -14,7 +14,7 @@ def package_info():
 	epilog = 'Could not load epilog...'
 	version = 'Could not load version...'
 
-	package_json = load_json_file('package.json')
+	package_json = load_json('package.json')
 
 	if package_json is not None:
 		description = package_json['description']
