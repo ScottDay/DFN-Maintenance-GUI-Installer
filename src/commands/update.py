@@ -1,4 +1,4 @@
-from src.util.logger import logger
+from src.util.logger import logger, section, debug
 from src.util.wrappers import wrapper
 from src.util.json import load_json
 from src.config import get_config
@@ -18,21 +18,19 @@ def update(args):
 	check_version(conf)
 
 
+@section('Checking version tags')
 def check_version(conf):
-	logger.debug('Checking versions')
-
 	remote_version = load_json(conf.releaseUrl, keys = 'tag_name')
 	local_version = load_json(conf.installerPath, conf.envFile, keys = 'version.release')
 
 	return parse_tags(remote_version, local_version)
 
 
+@debug('Parsing version tags')
 def parse_tags(remote, local):
 	import re
 
 	result = False
-
-	logger.debug('Parsing version tags.')
 
 	remote = re.sub('[^0-9]', '', remote)
 	local = re.sub('[^0-9]', '', local)
