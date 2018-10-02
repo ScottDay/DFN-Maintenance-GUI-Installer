@@ -1,8 +1,7 @@
 #!/bin/sh
-''''which python3.8 >/dev/null 2>&1 && exec python3.8 "$0" "$@" # '''
-''''which python3.7 >/dev/null 2>&1 && exec python3.7 "$0" "$@" # '''
 ''''which python3.6 >/dev/null 2>&1 && exec python3.6 "$0" "$@" # '''
-''''exec echo "Error: I can't find python3.[6|7|8] anywhere."   # '''
+''''which python3.5 >/dev/null 2>&1 && exec python3.5 "$0" "$@" # '''
+''''exec echo "Error: I can't find python3.[6|5] anywhere."     # '''
 
 from argh import ArghParser
 
@@ -37,11 +36,8 @@ url:     {3}
 
 # TODO: Command to check if it can be installed (correct python version, distribution, packages, maybe node / npm, etc.)
 # TODO: Check out nvm (node version manager) for its commands and how it works.
-# TODO: Rename project to maybe dfnvm, or dfn-gui-vm.
 if __name__ == '__main__':
-	"""
-	Entry-point function.
-	"""
+	"""Entry-point function."""
 	init()
 	description, epilog, version = package_info()
 
