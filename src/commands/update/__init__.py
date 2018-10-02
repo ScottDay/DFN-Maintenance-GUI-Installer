@@ -2,6 +2,7 @@ from src.util.wrappers import wrapper, logger, injector
 from .check_version import check_version
 from .download_update import download_update
 
+
 __all__ = ['update']
 
 
@@ -12,7 +13,6 @@ __all__ = ['update']
 # TODO: Use this update command to update everything, specific commands for each project (update-installer, update-gui, etc.)
 # TODO: Command to update to the dev version. Tie in with the specified projects dev version (installer dev version update, or gui dev version update).
 # TODO: Command to use docker version.
-# TODO: Place a installer config file in each project, use it to specify how to install and what commands to run.
 @wrapper
 @logger('Update')
 @injector

@@ -1,5 +1,6 @@
+from logging import basicConfig, StreamHandler
+
 from src.config import get_config, write_config
-from src.util.logger import logging
 
 
 def init():
@@ -49,13 +50,13 @@ def logger(conf):
 
 		return new
 
-	logging.basicConfig(
+	basicConfig(
 		level = conf.logger.level,
 		format = conf.logger.format,
 		datefmt = conf.logger.datefmt)
 
 	if conf.logger.color:
-		logging.StreamHandler.emit = color_logs(logging.StreamHandler.emit)
+		StreamHandler.emit = color_logs(StreamHandler.emit)
 
 
 
