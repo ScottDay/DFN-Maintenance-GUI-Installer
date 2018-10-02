@@ -1,9 +1,6 @@
-from src.util.logger import logger, section
-from src.util.wrappers import wrapper
-
+from src.util.wrappers import wrapper, logger, injector
 from .check_version import check_version
 from .download_update import download_update
-
 
 __all__ = ['update']
 
@@ -17,10 +14,11 @@ __all__ = ['update']
 # TODO: Command to use docker version.
 # TODO: Place a installer config file in each project, use it to specify how to install and what commands to run.
 @wrapper
+@logger('Update')
+@injector
 def update(args):
-	"""
-	Update the project to the latest version.
-	"""
+	"""Update the project to the latest version."""
+
 	update = check_version(args.conf)
 
 	if not args.dry:
