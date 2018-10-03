@@ -3,16 +3,12 @@ import json
 from urllib.request import urlopen
 from os.path import abspath
 
-from .logger import logger
-
 
 __all__ = ['load_json']
 
 
-def load_json(*url, keys = None):
+def load_json(url, keys = None):
 	url = ''.join(url)
-
-	logger.debug('Loading json file: "{0}"'.format(url))
 
 	if not any(value in url for value in ('http://', 'https://', 'file://')):
 		url = 'file://' + abspath(url)

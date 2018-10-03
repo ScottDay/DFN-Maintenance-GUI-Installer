@@ -7,7 +7,6 @@ from argh import ArghParser
 
 from src.extensions import init
 from src.util.json import load_json
-from src.util.logger import logging
 from src.commands import update, start, stop, restart
 
 
@@ -46,4 +45,3 @@ if __name__ == '__main__':
 	parent_parser.add_argument('-v', '--version', action = 'version', version = version)
 
 	parent_parser.dispatch()
-	logging.shutdown()
