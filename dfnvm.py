@@ -33,6 +33,8 @@ url:     {3}
 	return description, epilog, version
 
 
+# TODO: Export JWT_SECRET_KEY (generate if not already present) before running the backend application.
+# TODO: DataDog CLI. command for start / stop, another for start-service / stop-service. install-service. etc.
 # TODO: Command to check if it can be installed (correct python version, distribution, packages, maybe node / npm, etc.)
 # TODO: Check out nvm (node version manager) for its commands and how it works.
 if __name__ == '__main__':
