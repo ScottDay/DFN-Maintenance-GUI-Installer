@@ -1,10 +1,9 @@
-from src.util.logger import logger
-from src.util.wrappers import wrapper
+from src.util.wrappers import wrapper, logger, injector
 
 
 @wrapper
-def restart(args):
-	"""
-	Restart the GUI.
-	"""
-	logger.debug('TODO: Implement restart...')
+@logger('Restart')
+@injector
+def restart(args, log):
+	"""Restart the GUI."""
+	log.debug('TODO: Implement restart...')

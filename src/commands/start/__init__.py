@@ -1,11 +1,10 @@
-from src.util.logger import logger
-from src.util.wrappers import wrapper
+from src.util.wrappers import wrapper, logger, injector
 
 
 @wrapper
-def start(args):
-	"""
-	Start the GUI.
-	"""
-	logger.debug('TODO: Implement start...')
+@logger('Start')
+@injector
+def start(args, log):
+	"""Start the GUI."""
+	log.debug('TODO: Implement start...')
 

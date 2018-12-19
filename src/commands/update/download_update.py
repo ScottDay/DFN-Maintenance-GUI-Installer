@@ -1,6 +1,7 @@
-from src.util.logger import logger, section
+from src.util.wrappers import logger, injector
 
 
-@section('Downloading update')
-def download_update(conf):
-	logger.debug('test...')
+@logger('Downloading update')
+@injector
+def download_update(conf, log):
+	log.debug('test...')

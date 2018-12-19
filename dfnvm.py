@@ -1,10 +1,12 @@
-#!/usr/bin/python3.6
+#!/bin/sh
+''''which python3.6 >/dev/null 2>&1 && exec python3.6 "$0" "$@" # '''
+''''which python3.5 >/dev/null 2>&1 && exec python3.5 "$0" "$@" # '''
+''''exec echo "Error: I can't find python3.[6|5] anywhere."     # '''
 
 from argh import ArghParser
 
 from src.extensions import init
 from src.util.json import load_json
-from src.util.logger import logging
 from src.commands import update, start, stop, restart
 
 
@@ -31,10 +33,12 @@ url:     {3}
 	return description, epilog, version
 
 
+# TODO: Export JWT_SECRET_KEY (generate if not already present) before running the backend application.
+# TODO: DataDog CLI. command for start / stop, another for start-service / stop-service. install-service. etc.
+# TODO: Command to check if it can be installed (correct python version, distribution, packages, maybe node / npm, etc.)
+# TODO: Check out nvm (node version manager) for its commands and how it works.
 if __name__ == '__main__':
-	"""
-	Entry-point function.
-	"""
+	"""Entry-point function."""
 	init()
 	description, epilog, version = package_info()
 
@@ -43,4 +47,3 @@ if __name__ == '__main__':
 	parent_parser.add_argument('-v', '--version', action = 'version', version = version)
 
 	parent_parser.dispatch()
-	logging.shutdown()
